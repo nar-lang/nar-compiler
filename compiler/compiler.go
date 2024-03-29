@@ -2,16 +2,16 @@ package compiler
 
 import (
 	"fmt"
-	"github.com/nar-lang/nar-common/ast"
-	"github.com/nar-lang/nar-common/ast/normalized"
-	"github.com/nar-lang/nar-common/ast/parsed"
-	"github.com/nar-lang/nar-common/ast/typed"
-	"github.com/nar-lang/nar-common/bytecode"
-	"github.com/nar-lang/nar-common/common"
-	"github.com/nar-lang/nar-common/logger"
 	"github.com/nar-lang/nar-compiler"
+	"github.com/nar-lang/nar-compiler/ast"
+	"github.com/nar-lang/nar-compiler/ast/normalized"
+	"github.com/nar-lang/nar-compiler/ast/parsed"
+	"github.com/nar-lang/nar-compiler/ast/typed"
+	"github.com/nar-lang/nar-compiler/bytecode"
+	"github.com/nar-lang/nar-compiler/common"
 	"github.com/nar-lang/nar-compiler/linker"
 	"github.com/nar-lang/nar-compiler/locator"
+	"github.com/nar-lang/nar-compiler/logger"
 )
 
 const Version uint32 = 100

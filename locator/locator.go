@@ -2,7 +2,7 @@ package locator
 
 import (
 	"fmt"
-	"github.com/nar-lang/nar-common/bytecode"
+	"github.com/nar-lang/nar-compiler/bytecode"
 	"path/filepath"
 	"slices"
 	"strings"

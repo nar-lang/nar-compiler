@@ -1,13 +1,13 @@
 package nar_compiler
 
 import (
-	"github.com/nar-lang/nar-common/ast"
-	"github.com/nar-lang/nar-common/ast/normalized"
-	"github.com/nar-lang/nar-common/ast/parsed"
-	"github.com/nar-lang/nar-common/ast/typed"
-	"github.com/nar-lang/nar-common/common"
-	"github.com/nar-lang/nar-common/logger"
+	"github.com/nar-lang/nar-compiler/ast"
+	"github.com/nar-lang/nar-compiler/ast/normalized"
+	"github.com/nar-lang/nar-compiler/ast/parsed"
+	"github.com/nar-lang/nar-compiler/ast/typed"
+	"github.com/nar-lang/nar-compiler/common"
 	"github.com/nar-lang/nar-compiler/locator"
+	"github.com/nar-lang/nar-compiler/logger"
 	"slices"
 )
 
