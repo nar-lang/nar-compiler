@@ -28,7 +28,12 @@ func (d dllLinker) Link(log *logger.LogWriter, binary *bytecode.Binary, lc locat
 	_ = os.Mkdir(outDir, 0755)
 
 	buf := bytes.NewBuffer(nil)
-	err = binary.Write(bufio.NewWriter(buf), debug)
+	w := bufio.NewWriter(buf)
+	err = binary.Write(w, debug)
+	if err != nil {
+		return err
+	}
+	err = w.Flush()
 	if err != nil {
 		return err
 	}

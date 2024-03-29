@@ -14,6 +14,8 @@ import (
 	"github.com/nar-lang/nar-compiler/locator"
 )
 
+const Version uint32 = 100
+
 func Compile(log *logger.LogWriter, lc locator.Locator, link linker.Linker, debug bool) *bytecode.Binary {
 	parsedModules := map[ast.QualifiedIdentifier]*parsed.Module{}
 	normalizedModules := map[ast.QualifiedIdentifier]*normalized.Module{}
@@ -30,6 +32,7 @@ func CompileEx(
 ) (*bytecode.Binary, []ast.QualifiedIdentifier) {
 
 	bin := bytecode.NewBinary()
+	bin.CompilerVersion = Version
 	hash := bytecode.NewBinaryHash()
 
 	packages, err := lc.Packages()
@@ -39,7 +42,7 @@ func CompileEx(
 	}
 
 	for _, pkg := range packages {
-		bin.Packages[bytecode.QualifiedIdentifier(pkg.Info().Name)] = int32(pkg.Info().Version)
+		bin.Packages[bytecode.QualifiedIdentifier(pkg.Info().Name)] = uint32(pkg.Info().Version)
 	}
 
 	affectedModuleNames := nar_compiler.Compile(
@@ -71,8 +74,4 @@ func CompileEx(
 		}
 	}
 	return bin, affectedModuleNames
-}
-
-func Version() int {
-	return common.CompilerVersion
 }
