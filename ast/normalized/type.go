@@ -28,6 +28,9 @@ func (t *typeBase) Location() ast.Location {
 }
 
 func (t *typeBase) Successor() typed.Statement {
+	if t.successor == nil {
+		return nil
+	}
 	return t.successor
 }
 

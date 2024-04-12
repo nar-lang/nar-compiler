@@ -165,6 +165,9 @@ func (def *Definition) Code(currentModule ast.QualifiedIdentifier) string {
 }
 
 func (def *Definition) Bytecode(pathId ast.FullIdentifier, modName ast.QualifiedIdentifier, binary *bytecode.Binary, hash *bytecode.BinaryHash) bytecode.Func {
+	if def.body == nil {
+		return bytecode.Func{}
+	}
 	var ops []bytecode.Op
 	var locations []bytecode.Location
 

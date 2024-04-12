@@ -32,6 +32,9 @@ func (e *expressionBase) Location() ast.Location {
 }
 
 func (e *expressionBase) Successor() typed.Statement {
+	if e.successor == nil {
+		return nil
+	}
 	return e.successor
 }
 

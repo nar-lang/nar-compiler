@@ -77,6 +77,9 @@ func (def *definition) name() ast.Identifier {
 }
 
 func (def *definition) Successor() typed.Statement {
+	if def.successor == nil {
+		return nil
+	}
 	return def.successor
 }
 

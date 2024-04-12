@@ -41,7 +41,7 @@ func (module *Module) AddDependencies(modName ast.QualifiedIdentifier, identName
 
 func (module *Module) extractLambda(
 	loc ast.Location, parentName ast.Identifier, params []Pattern, body Expression,
-	locals map[ast.Identifier]Pattern, name ast.Identifier,
+	locals map[ast.Identifier]Pattern, name ast.Identifier, nameLocation ast.Location,
 ) (def Definition, usedLocals []ast.Identifier, replacement Expression) {
 	lastLambdaId++
 	lambdaName := ast.Identifier(fmt.Sprintf("_lmbd_%s_%d_%s", parentName, lastLambdaId, name))
@@ -50,7 +50,7 @@ func (module *Module) extractLambda(
 	LastDefinitionId++
 	localParams := common.Map(func(x ast.Identifier) Pattern { return NewPNamed(loc, nil, x) }, usedLocals)
 	params = append(localParams, params...)
-	def = NewDefinition(loc, LastDefinitionId, true, lambdaName, loc, params, body, nil)
+	def = NewDefinition(loc, LastDefinitionId, true, lambdaName, nameLocation, params, body, nil)
 	module.definitions = append(module.definitions, def)
 
 	replacement = NewGlobal(loc, module.name, def.name())

@@ -39,7 +39,7 @@ func NewFunction(
 
 func (e *Function) flattenLambdas(parentName ast.Identifier, m *Module, locals map[ast.Identifier]Pattern) Expression {
 	lambdaDef, usedLocals, replacement := m.extractLambda(
-		e.location, parentName, e.params, e.body, locals, e.name)
+		e.location, parentName, e.params, e.body, locals, e.name, e.location)
 
 	e.predecessor.SetSuccessor(lambdaDef.body())
 

@@ -26,6 +26,9 @@ func (p *patternBase) Location() ast.Location {
 }
 
 func (p *patternBase) Successor() typed.Statement {
+	if p.successor == nil {
+		return nil
+	}
 	return p.successor
 }
 

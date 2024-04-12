@@ -160,7 +160,7 @@ func (d *dataTypeOption) constructor(moduleName ast.QualifiedIdentifier, dataNam
 		d.values,
 	)
 
-	def := NewDefinition(d.location, d.hidden || hidden, d.name, d.location, params, body, type_)
+	def := NewDefinition(d.location, d.hidden || hidden, d.name, d.nameLocation, params, body, type_)
 	d.successor = def
 	return def
 }
@@ -189,15 +189,17 @@ func (d *dataTypeOption) Iterate(f func(statement Statement)) {
 func (d *dataTypeOption) _parsed() {}
 
 type DataTypeValue struct {
-	location ast.Location
-	name     ast.Identifier
-	type_    Type
+	location     ast.Location
+	name         ast.Identifier
+	type_        Type
+	nameLocation ast.Location
 }
 
-func NewDataTypeValue(loc ast.Location, name ast.Identifier, type_ Type) *DataTypeValue {
+func NewDataTypeValue(loc ast.Location, name ast.Identifier, type_ Type, nameLocation ast.Location) *DataTypeValue {
 	return &DataTypeValue{
-		location: loc,
-		name:     name,
-		type_:    type_,
+		location:     loc,
+		name:         name,
+		type_:        type_,
+		nameLocation: nameLocation,
 	}
 }

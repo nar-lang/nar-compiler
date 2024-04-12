@@ -51,6 +51,9 @@ func (t *TFunc) normalize(modules map[ast.QualifiedIdentifier]*Module, module *M
 		}
 		params = append(params, nParam)
 	}
+	if t.return_ == nil {
+		return nil, common.NewErrorAt(t.location, "missing return type annotation")
+	}
 	ret, err := t.return_.normalize(modules, module, namedTypes)
 	if err != nil {
 		return nil, err

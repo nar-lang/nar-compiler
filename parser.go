@@ -1368,7 +1368,8 @@ func parseDataOption(src *source) (parsed.DataTypeOption, error) {
 			if nil == type_ {
 				return nil, newError(*src, "expected option value type here")
 			}
-			types = append(types, parsed.NewDataTypeValue(loc(src, argCursor), ast.Identifier(*valueName), type_))
+			types = append(types,
+				parsed.NewDataTypeValue(loc(src, argCursor), ast.Identifier(*valueName), type_, nameLoc))
 
 			if readExact(src, SeqComma) {
 				continue
@@ -1376,6 +1377,7 @@ func parseDataOption(src *source) (parsed.DataTypeOption, error) {
 			if readExact(src, SeqParenthesisClose) {
 				break
 			}
+			return nil, newError(*src, "expected `,` or `)`")
 		}
 	}
 
@@ -1661,7 +1663,7 @@ func parseDefinition(src *source, modName ast.QualifiedIdentifier) (parsed.Defin
 				for _, x := range params {
 					if named, ok := x.(*parsed.PNamed); ok {
 						args = append(args, parsed.NewVar(x.Location(), ast.QualifiedIdentifier(named.Name())))
-					} else {
+					} else if _, ok := x.(*parsed.PAny); !ok {
 						err = newError(*src,
 							"native function should start with lowercase letter and cannot be a pattern match")
 						break

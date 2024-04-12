@@ -21,7 +21,7 @@ func NewLambda(loc ast.Location, params []Pattern, body Expression) Expression {
 }
 
 func (e *Lambda) flattenLambdas(parentName ast.Identifier, m *Module, locals map[ast.Identifier]Pattern) Expression {
-	def, _, replacement := m.extractLambda(e.Location(), parentName, e.params, e.body, locals, "")
+	def, _, replacement := m.extractLambda(e.Location(), parentName, e.params, e.body, locals, "", e.Location())
 	paramNames := extractParamNames(def.params())
 	def.setBody(def.body().flattenLambdas(def.name(), m, paramNames))
 	return replacement
