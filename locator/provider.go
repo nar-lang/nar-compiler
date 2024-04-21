@@ -152,7 +152,7 @@ func (d *directoryProvider) load() error {
 		return fmt.Errorf("failed to read directory: %w", err)
 	}
 	for _, dir := range dirs {
-		if !dir.IsDir() {
+		if !dir.IsDir() && (dir.Type()&os.ModeSymlink) != os.ModeSymlink {
 			continue
 		}
 		provider := NewFileSystemPackageProvider(filepath.Join(d.root, dir.Name())).(*fileSystemProvider)
