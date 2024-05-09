@@ -39,13 +39,16 @@ func (e *Update) checkPatterns() error {
 	return nil
 }
 
-func NewUpdateLocal(loc ast.Location, recordName ast.Identifier, target Pattern, fields []*RecordField) Expression {
-	return &Update{
+func NewUpdateLocal(
+	ctx *SolvingContext, loc ast.Location,
+	recordName ast.Identifier, target Pattern, fields []*RecordField,
+) Expression {
+	return ctx.annotateExpression(&Update{
 		expressionBase: newExpressionBase(loc),
 		recordName:     recordName,
 		fields:         fields,
 		target:         target,
-	}
+	})
 }
 
 func (e *Update) mapTypes(subst map[uint64]Type) error {

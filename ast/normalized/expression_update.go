@@ -80,6 +80,7 @@ func (e *Update) annotate(ctx *typed.SolvingContext, typeParams typeParamsMap, m
 		if e.target == nil {
 			return nil, common.NewErrorOf(e, "local variable `%s` not resolved", e.recordName)
 		}
-		return e.setSuccessor(typed.NewUpdateLocal(e.location, e.recordName, e.target.Successor().(typed.Pattern), fields))
+		return e.setSuccessor(typed.NewUpdateLocal(
+			ctx, e.location, e.recordName, e.target.Successor().(typed.Pattern), fields))
 	}
 }
