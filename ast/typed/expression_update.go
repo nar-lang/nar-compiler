@@ -96,7 +96,7 @@ func (e *Update) appendEquations(eqs Equations, loc *ast.Location, localDefs loc
 		fieldTypes[f.name] = f.type_
 	}
 
-	eqs = append(eqs, NewEquation(e, e.type_, NewTRecord(e.location, fieldTypes, false)))
+	eqs = append(eqs, NewEquation(e, e.type_, NewTRecord(e.location, fieldTypes, true)))
 
 	for _, f := range e.fields {
 		l := loc
