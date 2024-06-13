@@ -288,14 +288,14 @@ func (module *Module) findDefinitionAndAddDependency(
 	name ast.QualifiedIdentifier,
 	normalizedModule *normalized.Module,
 ) (Definition, *Module, []ast.FullIdentifier) {
-	d, m, id := module.findDefinition(modules, name)
+	d, m, id := module.FindDefinition(modules, name)
 	if len(id) == 1 {
 		normalizedModule.AddDependencies(m.name, d.Name())
 	}
 	return d, m, id
 }
 
-func (module *Module) findDefinition(
+func (module *Module) FindDefinition(
 	modules map[ast.QualifiedIdentifier]*Module, name ast.QualifiedIdentifier,
 ) (Definition, *Module, []ast.FullIdentifier) {
 	var defNameEq = func(x Definition) bool {
@@ -318,7 +318,7 @@ func (module *Module) findDefinition(
 	if modules != nil {
 		for _, imp := range module.imports {
 			if imp.exposes(string(name)) {
-				return modules[imp.Module()].findDefinition(nil, defName)
+				return modules[imp.Module()].FindDefinition(nil, defName)
 			}
 		}
 
@@ -330,7 +330,7 @@ func (module *Module) findDefinition(
 		if modName != "" {
 			if submodule, ok := modules[ast.QualifiedIdentifier(modName)]; ok {
 				if module.isReferenced(submodule) {
-					return submodule.findDefinition(nil, defName)
+					return submodule.FindDefinition(nil, defName)
 				}
 			}
 
@@ -339,7 +339,7 @@ func (module *Module) findDefinition(
 			for modId, submodule := range modules {
 				if module.isReferenced(submodule) {
 					if strings.HasSuffix(string(modId), modName) {
-						if d, m, i := submodule.findDefinition(nil, defName); len(i) != 0 {
+						if d, m, i := submodule.FindDefinition(nil, defName); len(i) != 0 {
 							rDef = d
 							rModule = m
 							rIdent = append(rIdent, i...)
@@ -358,7 +358,7 @@ func (module *Module) findDefinition(
 			for modId, submodule := range modules {
 				if module.isReferenced(submodule) {
 					if strings.HasSuffix(string(modId), modDotName) || modId == defName {
-						if d, m, i := submodule.findDefinition(nil, defName); len(i) != 0 {
+						if d, m, i := submodule.FindDefinition(nil, defName); len(i) != 0 {
 							rDef = d
 							rModule = m
 							rIdent = append(rIdent, i...)
@@ -375,7 +375,7 @@ func (module *Module) findDefinition(
 			//6. search all modules
 			for _, submodule := range modules {
 				if module.isReferenced(submodule) {
-					if d, m, i := submodule.findDefinition(nil, defName); len(i) != 0 {
+					if d, m, i := submodule.FindDefinition(nil, defName); len(i) != 0 {
 						rDef = d
 						rModule = m
 						rIdent = append(rIdent, i...)
