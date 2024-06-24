@@ -88,7 +88,7 @@ func loc(src *source, start uint32) ast.Location {
 		return ast.NewLocation(src.filePath, src.text, 0, 0)
 	}
 	end := src.cursor - 1
-	for end > start && unicode.IsSpace(src.text[end]) {
+	for end > start && end < uint32(len(src.text)) && unicode.IsSpace(src.text[end]) {
 		end--
 	}
 	end++
