@@ -58,18 +58,18 @@ func (t *TFunc) mapTo(subst map[uint64]Type) (Type, error) {
 	return t, nil
 }
 
-func (t *TFunc) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
+func (t *TFunc) EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 	ty, oky := other.(*TFunc)
 	if oky {
 		if len(t.params) != len(ty.params) {
 			return false
 		}
 		for i, p := range t.params {
-			if !p.equalsTo(ty.params[i], req) {
+			if !p.EqualsTo(ty.params[i], req) {
 				return false
 			}
 		}
-		return t.return_.equalsTo(ty.return_, req)
+		return t.return_.EqualsTo(ty.return_, req)
 	}
 	return false
 }

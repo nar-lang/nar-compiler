@@ -53,7 +53,7 @@ func (t *TData) mapTo(subst map[uint64]Type) (Type, error) {
 	return t, nil
 }
 
-func (t *TData) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
+func (t *TData) EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 	ty, oky := other.(*TData)
 	if oky {
 		if t.name != ty.name {
@@ -70,7 +70,7 @@ func (t *TData) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 			return false
 		}
 		for i, a := range t.args {
-			if !a.equalsTo(ty.args[i], req) {
+			if !a.EqualsTo(ty.args[i], req) {
 				return false
 			}
 		}

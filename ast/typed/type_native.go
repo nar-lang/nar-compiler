@@ -51,7 +51,7 @@ func (t *TNative) mapTo(subst map[uint64]Type) (Type, error) {
 	return t, nil
 }
 
-func (t *TNative) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
+func (t *TNative) EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 	ty, oky := other.(*TNative)
 	if oky {
 		if t.name != ty.name {
@@ -61,7 +61,7 @@ func (t *TNative) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool
 			return false
 		}
 		for i, a := range t.args {
-			if !a.equalsTo(ty.args[i], req) {
+			if !a.EqualsTo(ty.args[i], req) {
 				return false
 			}
 		}

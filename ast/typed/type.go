@@ -9,7 +9,7 @@ type Type interface {
 	Statement
 	bytecoder
 	_type()
-	equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool
+	EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool
 	merge(other Type, loc ast.Location) (Equations, error)
 	mapTo(subst map[uint64]Type) (Type, error)
 	makeUnique(ctx *SolvingContext, ubMap map[uint64]uint64) Type

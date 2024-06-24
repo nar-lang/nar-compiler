@@ -42,12 +42,12 @@ func (eq Equation) String(index int) string {
 }
 
 func (eq Equation) equalsTo(other Equation) bool {
-	return (eq.left.equalsTo(other.left, nil) && eq.right.equalsTo(other.right, nil)) ||
-		(eq.right.equalsTo(other.left, nil) && eq.left.equalsTo(other.right, nil))
+	return (eq.left.EqualsTo(other.left, nil) && eq.right.EqualsTo(other.right, nil)) ||
+		(eq.right.EqualsTo(other.left, nil) && eq.left.EqualsTo(other.right, nil))
 }
 
 func (eq Equation) isRedundant() bool {
-	return eq.left.equalsTo(eq.right, nil)
+	return eq.left.EqualsTo(eq.right, nil)
 }
 
 type Equations []Equation

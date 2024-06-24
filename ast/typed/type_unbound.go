@@ -63,7 +63,7 @@ func (t *TUnbound) mapTo(subst map[uint64]Type) (Type, error) {
 	return nil, common.NewErrorOf(t, "failed to infer type")
 }
 
-func (t *TUnbound) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
+func (t *TUnbound) EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 	ty, oky := other.(*TUnbound)
 	if oky {
 		return t.index == ty.index && t.constraint == ty.constraint

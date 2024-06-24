@@ -60,7 +60,7 @@ func (t *TRecord) mapTo(subst map[uint64]Type) (Type, error) {
 	return t, nil
 }
 
-func (t *TRecord) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
+func (t *TRecord) EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 	ty, oky := other.(*TRecord)
 	if oky {
 		if len(t.fields) != len(ty.fields) {
@@ -69,7 +69,7 @@ func (t *TRecord) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool
 		for n, fx := range t.fields {
 			if fy, ok := ty.fields[n]; !ok {
 				return false
-			} else if !fx.equalsTo(fy, req) {
+			} else if !fx.EqualsTo(fy, req) {
 				return false
 			}
 		}

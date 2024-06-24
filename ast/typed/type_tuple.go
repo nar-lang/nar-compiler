@@ -46,14 +46,14 @@ func (t *TTuple) mapTo(subst map[uint64]Type) (Type, error) {
 	return t, nil
 }
 
-func (t *TTuple) equalsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
+func (t *TTuple) EqualsTo(other Type, req map[ast.FullIdentifier]struct{}) bool {
 	ty, oky := other.(*TTuple)
 	if oky {
 		if len(t.items) != len(ty.items) {
 			return false
 		}
 		for i, p := range t.items {
-			if !p.equalsTo(ty.items[i], req) {
+			if !p.EqualsTo(ty.items[i], req) {
 				return false
 			}
 		}
