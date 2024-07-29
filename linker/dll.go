@@ -25,7 +25,7 @@ func (d dllLinker) Link(log *logger.LogWriter, binary *bytecode.Binary, lc locat
 		return err
 	}
 	outDir := filepath.Dir(d.outFilePath)
-	_ = os.Mkdir(outDir, 0755)
+	_ = os.MkdirAll(outDir, 0755)
 
 	buf := bytes.NewBuffer(nil)
 	w := bufio.NewWriter(buf)
