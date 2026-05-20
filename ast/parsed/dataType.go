@@ -12,6 +12,7 @@ type DataType interface {
 	Name() ast.Identifier
 	Options() []DataTypeOption
 	Hidden() bool
+	StringTree(offset int) string
 }
 
 func NewDataType(
@@ -102,6 +103,7 @@ type DataTypeOption interface {
 	constructor(moduleName ast.QualifiedIdentifier, dataName ast.Identifier, dataType Type, hidden bool) Definition
 	Name() ast.Identifier
 	Hidden() bool
+	StringTree(offset int) string
 }
 
 func NewDataTypeOption(loc ast.Location, hidden bool, name ast.Identifier, values []*DataTypeValue, nameLocation ast.Location) DataTypeOption {

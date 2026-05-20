@@ -14,6 +14,7 @@ type Import interface {
 	Module() ast.QualifiedIdentifier
 	unwrap(modules map[ast.QualifiedIdentifier]*Module) error
 	Alias() *ast.Identifier
+	StringTree(offset int) string
 }
 
 func NewImport(

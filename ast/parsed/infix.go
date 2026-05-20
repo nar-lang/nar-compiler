@@ -12,6 +12,7 @@ type Infix interface {
 	hidden() bool
 	Name() ast.InfixIdentifier
 	Location() ast.Location
+	StringTree(offset int) string
 }
 
 func NewInfix(

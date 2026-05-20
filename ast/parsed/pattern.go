@@ -16,6 +16,7 @@ type Pattern interface {
 	Type() Type
 	SetDeclaredType(decl Type)
 	setSuccessor(n normalized.Pattern) normalized.Pattern
+	StringTree(offset int) string
 }
 
 func newPatternBase(loc ast.Location) *patternBase {

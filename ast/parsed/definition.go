@@ -16,6 +16,7 @@ type Definition interface {
 	Hidden() bool
 	Body() Expression
 	Params() []Pattern
+	StringTree(offset int) string
 }
 
 func NewDefinition(

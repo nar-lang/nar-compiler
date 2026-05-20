@@ -1,6 +1,8 @@
 package normalized
 
 import (
+	"sort"
+
 	"github.com/nar-lang/nar-compiler/ast"
 	"github.com/nar-lang/nar-compiler/ast/typed"
 	"github.com/nar-lang/nar-compiler/common"
@@ -66,6 +68,8 @@ func extractUsedLocals(
 			uniqueLocals = append(uniqueLocals, k)
 		}
 	}
+	// Sort for deterministic output (Go map iteration is randomized).
+	sort.Slice(uniqueLocals, func(i, j int) bool { return uniqueLocals[i] < uniqueLocals[j] })
 	return uniqueLocals
 }
 

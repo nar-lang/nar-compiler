@@ -10,6 +10,7 @@ type Type interface {
 	normalize(modules map[ast.QualifiedIdentifier]*Module, module *Module, namedTypes namedTypeMap) (normalized.Type, error)
 	setSuccessor(p normalized.Type) (normalized.Type, error)
 	applyArgs(params map[ast.Identifier]Type, loc ast.Location) (Type, error)
+	StringTree(offset int) string
 }
 
 type typeBase struct {

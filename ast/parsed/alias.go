@@ -12,6 +12,7 @@ type Alias interface {
 	inferType(moduleName ast.QualifiedIdentifier, args []Type) (Type, ast.FullIdentifier, error)
 	Hidden() bool
 	aliasType() Type
+	StringTree(offset int) string
 }
 
 func NewAlias(loc ast.Location, hidden bool, name ast.Identifier, params []ast.Identifier, type_ Type, nameLocation ast.Location) Alias {

@@ -14,6 +14,7 @@ type Expression interface {
 		normalizedModule *normalized.Module,
 	) (normalized.Expression, error)
 	setSuccessor(expr normalized.Expression) (normalized.Expression, error)
+	StringTree(offset int) string
 }
 
 func newExpressionBase(location ast.Location) *expressionBase {

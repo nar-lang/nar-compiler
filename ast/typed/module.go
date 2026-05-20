@@ -79,7 +79,12 @@ func (module *Module) Compose(
 
 	hash.CompiledPaths = append(hash.CompiledPaths, bytecode.QualifiedIdentifier(module.name))
 
+	depNames := make([]ast.QualifiedIdentifier, 0, len(module.dependencies))
 	for depModule := range module.dependencies {
+		depNames = append(depNames, depModule)
+	}
+	slices.Sort(depNames)
+	for _, depModule := range depNames {
 		m, ok := modules[depModule]
 		if !ok {
 			return common.NewErrorOf(module, "module '%s' not found", depModule)
